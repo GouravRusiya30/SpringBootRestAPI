@@ -10,7 +10,7 @@
 
 # Step 1: Creating a Database
 Get a running instance of MongoDB that you can connect to. 
-For more information on getting started with MongoDB, visit their online tutorial.
+For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
 
 Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, or through a database manager like MongoDB Compass:
 ```use rest_tutorial;```
