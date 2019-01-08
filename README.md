@@ -4,7 +4,7 @@
 ```Tech Stack Used in this project :```
 * Java
 * Spring Boot
-* Maven
+* Gradle
 * MongoDB
 * Postman
 
