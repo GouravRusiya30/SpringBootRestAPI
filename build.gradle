@@ -1,3 +1,7 @@
+plugins {
+  id "org.sonarqube" version "2.7"
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'jacoco'
@@ -13,10 +17,7 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
-
-
 repositories {
-        
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
