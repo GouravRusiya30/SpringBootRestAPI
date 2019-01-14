@@ -9,6 +9,15 @@
 * MongoDB
 * Postman
 
+# Task List Status 
+- [X] Rest controllers and models using SpringBoot
+- [X] MongoDB configuration
+- [X] TravisCI build
+- [X] SonarQube integration 
+- [ ] 80% and above Code Coverage
+- [ ] Cloud deployment script addition to travis
+
+
 # Step 1: Creating a Database
 Get a running instance of MongoDB that you can connect to. 
 For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
