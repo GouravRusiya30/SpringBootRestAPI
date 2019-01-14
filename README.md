@@ -9,7 +9,7 @@
 * MongoDB
 * Postman
 
-## Task List Status 
+## Task List Progress
 - [X] Rest controllers and models using SpringBoot
 - [X] MongoDB configuration
 - [X] TravisCI build
