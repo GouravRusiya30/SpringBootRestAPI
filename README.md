@@ -26,7 +26,7 @@ For more information on getting started with MongoDB, visit their [online tutori
 
 Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, or through a database manager like MongoDB Compass:
 ```use rest_tutorial;```
-This will create a new database in MongoDB that we can use for our tutorial.
+This will create a new database in MongoDB that we can use for our project.
 
 ### Step 2: Adding a MongoDB Collection and Data
 Create a sample collection that will hold data about different types of pets. Let's create the collection with the following command:
