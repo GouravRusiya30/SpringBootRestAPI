@@ -14,6 +14,7 @@
 - [X] MongoDB configuration
 - [X] TravisCI build
 - [X] SonarQube integration 
+- [X] Jacoco Test report
 - [ ] 80% and above Code Coverage
 - [ ] Cloud deployment script addition to travis
 
