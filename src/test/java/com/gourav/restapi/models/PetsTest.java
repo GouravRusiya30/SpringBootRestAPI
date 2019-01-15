@@ -1,4 +1,4 @@
-package com.gourav.restApi.models;
+package com.gourav.restapi.models;
 
 import static org.junit.Assert.*;
 import org.bson.types.ObjectId;
@@ -6,13 +6,13 @@ import org.junit.Test;
 
 public class PetsTest {
 	
-	ObjectId _id = ObjectId.get();
+	ObjectId id = ObjectId.get();
 	Pets pets = new Pets();
 	
 	@Test
-	public void testSet_id(){
-		pets.set_id(_id);
-		assertTrue(pets.get_id().equals(_id.toHexString()));
+	public void testSetId(){
+		pets.setId(id);
+		assertTrue(pets.getId().equals(id.toHexString()));
 	}
 	
 	@Test

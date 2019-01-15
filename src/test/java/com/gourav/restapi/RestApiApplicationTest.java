@@ -1,4 +1,4 @@
-package com.gourav.restApi;
+package com.gourav.restapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.gourav.restApi;
+package com.gourav.restapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
