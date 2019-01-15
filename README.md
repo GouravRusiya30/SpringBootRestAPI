@@ -1,6 +1,7 @@
 # REST API: Java Spring Boot and MongoDB
 [![Travis Build Status](https://travis-ci.org/GouravRusiya30/SpringBootRestAPI.svg?branch=master)](https://travis-ci.org/GouravRusiya30/SpringBootRestAPI)
 [![sonar](https://sonarcloud.io/api/project_badges/measure?project=GouravRusiya30_SpringBootRestAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=GouravRusiya30_SpringBootRestAPI)
+([![codecov](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI))
 
 ```Tech Stack Used in this project :```
 * Java
