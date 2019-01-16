@@ -3,21 +3,21 @@
 [![sonar](https://sonarcloud.io/api/project_badges/measure?project=GouravRusiya30_SpringBootRestAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=GouravRusiya30_SpringBootRestAPI)
 [![codecov](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI)
 
-```Tech Stack Used in this project :```
-* Java
-* Spring Boot
-* Gradle
-* MongoDB
-* Postman
-
 ## Task List Progress
 - [X] Rest controllers and models using SpringBoot
 - [X] MongoDB configuration
 - [X] TravisCI build
 - [X] SonarQube integration 
 - [X] Jacoco Test report
+- [ ] JWT authentication
 - [ ] 80% and above Code Coverage
 - [ ] Cloud deployment
+
+```Tech Stack Used in this project :```
+* Java
+* Spring Boot
+* Gradle
+* MongoDB
 
 ## ```Setup Steps ```
 
