@@ -13,7 +13,8 @@
 - [ ] 80% and above Code Coverage
 - [ ] Cloud deployment
 
-```Tech Stack Used in this project :```
+
+```Tech Stack Used in this project ```
 * Java
 * Spring Boot
 * Gradle
