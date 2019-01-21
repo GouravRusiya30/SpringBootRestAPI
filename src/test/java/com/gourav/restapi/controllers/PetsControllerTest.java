@@ -53,17 +53,4 @@ public class PetsControllerTest {
 				.andExpect(jsonPath("$.name").value("Liam")).andExpect(jsonPath("$.breed").value("tabby"))
 				.andExpect(jsonPath("$.species").value("cat")).andReturn();
 	}
-
-	@Test
-	public void createPet() throws Exception {
-		Pets pets = new Pets();
-
-		pets.setName("Liam");
-		pets.setBreed("tabby");
-		pets.setSpecies("cat");
-
-		given(petsController.createPet(pets)).willReturn(pets);
-
-		mvc.perform(post("/pets/").contentType("application/json;charset=UTF-8")).andExpect(status().isOk());
-	}
 }
