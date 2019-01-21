@@ -34,3 +34,7 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+sonarqube {
+    androidVariant 'fullDebug'
+}
