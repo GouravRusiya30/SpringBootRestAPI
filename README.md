@@ -14,7 +14,7 @@ This project mainly focussed on the kickstart to the CI/CD using TravisCI. Also 
 - [X] SonarQube integration 
 - [X] Jacoco Test report
 - [ ] JWT authentication
-- [ ] 80% and above Code Coverage
+- [ ] 80% and above Code Coverage (using codecov or coveralls)
 - [ ] Cloud deployment
 
 ### Getting Started
@@ -66,6 +66,14 @@ Use postman for the below tests :
 ##### [deletePet](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/deletePet.png)
 
 ##### [modifyPetById](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/modifyPetById.png)
+
+### Code Coverage
+For code coverage reports integration, I have shown example using Codecov and Coveralls as both are pretty popular and easy to integrate with the travis.
+
+* Codecov -  Just add [this line](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/.travis.yml#L5) in the [.travis.yml](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/.travis.yml) which will send the jacoco report to the codecov console
+
+* Coveralls - Need to add [coveralls plugin](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/coverall-integration/build.gradle#L3) and [jacoco report path](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/97df783623e5c35696451c580cc7895d17c0743a/build.gradle#L52) in the build.gradle file. Also need change in [.travis.yml](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/97df783623e5c35696451c580cc7895d17c0743a/build.gradle#L52) instead of codecov to use coveralls
+
 
 ### Contributing
 Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
