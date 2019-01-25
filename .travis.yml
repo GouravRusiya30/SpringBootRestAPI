@@ -1,5 +1,10 @@
 language: java
 jdk: oraclejdk8
 
+before_install:
+  - pwd
+  - ls -la
+  - chmod +x /.gradlew
+
 after_success:
-- ./gradlew test jacocoTestReport coveralls
+  - ./gradlew test jacocoTestReport coveralls
