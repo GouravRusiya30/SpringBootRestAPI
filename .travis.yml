@@ -4,7 +4,7 @@ jdk: oraclejdk8
 before_install:
   - pwd
   - ls -la
-  - chmod +x /.gradlew
+  - chmod +x ./gradlew
 
 after_success:
   - ./gradlew test jacocoTestReport coveralls
