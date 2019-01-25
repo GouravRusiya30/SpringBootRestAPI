@@ -48,3 +48,7 @@ check.dependsOn jacocoTestReport
 sonarqube {
     androidVariant 'fullDebug'
 }
+
+coveralls {
+    jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
+}
