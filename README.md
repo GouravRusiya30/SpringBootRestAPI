@@ -74,9 +74,12 @@ For code coverage reports integration, I have shown example using Codecov and Co
 
 * Coveralls - Need to add [coveralls plugin](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/coverall-integration/build.gradle#L3) and [jacoco report path](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/97df783623e5c35696451c580cc7895d17c0743a/build.gradle#L52) in the build.gradle file. Also need change in [.travis.yml](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/97df783623e5c35696451c580cc7895d17c0743a/build.gradle#L52) instead of codecov to use coveralls
 
+### Pull Request Process
+``Are you up for your first PR for this project !!!``
+Awesome but please first go through the [PULL REQUEST TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/PULL_REQUEST_TEMPLATE.md) and follow the instructions to make sure it follows all the guidelines.
 
 ### Contributing
-Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Authors
 * **Gourav Rusiya** 
