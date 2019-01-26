@@ -80,10 +80,10 @@ Awesome but please first go through the [ISSUE TEMPLATE.md](https://github.com/G
 
 ### Pull Request Template
 ``Are you up for your first PR for this project !!!``
-Awesome but please first go through the [PULL REQUEST TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/PULL_REQUEST_TEMPLATE.md) and use this template to submit your PR.
+Awesome but please first go through the [PULL REQUEST TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/PULL_REQUEST_TEMPLATE.md) and use this template to submit your PR.
 
 ### Contributing
-Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/GouravRusiya30/SpringBootRestAPI/CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Authors
 * **Gourav Rusiya** 
