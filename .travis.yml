@@ -1,5 +1,11 @@
 language: java
 jdk: oraclejdk9
 
+- echo "MONGO_PWD is $MONGO_PWD"
+
+- chmod 755 replaceVar.sh
+
+- bash <(sed -i "" -e "s|%MONGO_PWD%|MONGO_PWD|g" src/main/resources/application.properties)
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
