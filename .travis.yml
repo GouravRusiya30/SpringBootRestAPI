@@ -1,8 +1,5 @@
 language: java
 jdk: oraclejdk9
 
-stages:
-  - compile
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
