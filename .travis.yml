@@ -1,14 +1,5 @@
 language: java
 jdk: oraclejdk9
 
-env:
-  secure: LxECb9g4so40R8sJX1QmZSFuybmvocnqhYxXNyr0XN+xdx8gnkzO11DZQ89y/o4wFaB+dE3zdZRblzJb65zf5QgBVXXJ8zF949w6OwmTsUCd1TMXAFMNlVc7jNT6HI3Ntigvn7mZ1l/jpx2e9dJVkORk9rQ8sEttn/AaVK4A3rBNAJW80pAg3sRX0Ug7Eph09r/p4NuDj5IihTE0r6tBgYorerQMU7bOv+d3LW7//BmqGOxeQy3x36k4SqeYz8iQItA9UgEwd44xi+v6aZoXkJjf01Glsf4V2g/lt+RvRXy5TKuixr8Z8AqqpLjyQ6NoPCaW1h6Rha8odPpEDA/5s9hi+ZZeQApHsSOMkWXwrNeEJ9G8fpxw94iT6H+2CM5+JXyZG/mpuXInzEvu4pYVqyondzNbuv96/8UX2m14vu9b0ZNq4c+hCh9Nc8HA0v8N0mokT5zWqCYPgjHoUd91hh5In/8DRy21TkF7mjOPg4wAos3+R+8Zt+oivaO+sj1n+txjUl8pXkeZP51jg6gPeX4hBevLL0LkjjE4AKKC4EanDvI8k6vcATjI2poTp2l0yKUNv41EQdQlRKeh/HYGNgAmdBR5YGs2QnRLhmQmVCkmqAnbuH3e8FdRVgvU2G4GMnoYwnTdATLV6Jz+RxsspicOQtPP+duNukI2am6J5i4=
-
-- echo "MONGO_PWD is $MONGO_PWD"
-
-- chmod 755 replaceVar.sh
-
-- bash <(sed -i "" -e "s|%MONGO_PWD%|MONGO_PWD|g" src/main/resources/application.properties)
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
