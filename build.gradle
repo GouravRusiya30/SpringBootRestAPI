@@ -16,6 +16,15 @@ targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/libs"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
 
 repositories {
      maven { url "https://repo.maven.apache.org/maven2" }
@@ -24,6 +33,19 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version:'2.1.1.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.1.1.RELEASE'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.1.1.RELEASE'
+}
+
+gradle.taskGraph.whenReady {
+  taskGraph ->
+    if (taskGraph.hasTask(stage)) {
+      test.enabled = false
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.gourav.restapi.RestApiApplication'
+    }
 }
 
 jacocoTestReport {
