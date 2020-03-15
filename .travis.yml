@@ -12,6 +12,10 @@ env:
 
 - echo MONGO_PWD
 
+- chmod 755 replaceVar.sh
+
+- replaceVar.sh
+
 stages:
   - compile
 
