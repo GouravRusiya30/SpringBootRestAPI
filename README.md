@@ -12,7 +12,6 @@
 [![HitCount](http://hits.dwyl.io/GouravRusiya30/SpringBootRestAPI.svg)](http://hits.dwyl.io/GouravRusiya30/SpringBootRestAPI)
 
 ## Desciption
-Simple rest api using spring boot and mongodb as nosql storage. 
 This project mainly focussed on the kickstart to the CI/CD using TravisCI. Also includes CodeCoverage, Sonarqube integration which can be plugged into any application.
 
 ## Task List Progress
