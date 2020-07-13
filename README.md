@@ -1,4 +1,4 @@
-# [REST API: Java Spring Boot and MongoDB](https://gouravrusiya30.github.io/SpringBootRestAPI/)
+# [ RestAPI Template - Spring Boot + MongoDB](https://gouravrusiya30.github.io/SpringBootRestAPI/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/LICENSE)
 [![Travis Build Status](https://travis-ci.org/GouravRusiya30/SpringBootRestAPI.svg?branch=master)](https://travis-ci.org/GouravRusiya30/SpringBootRestAPI)
 [![sonar](https://sonarcloud.io/api/project_badges/measure?project=GouravRusiya30_SpringBootRestAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=GouravRusiya30_SpringBootRestAPI)
@@ -11,8 +11,12 @@
 [![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://code.publiclab.org#r=all)
 [![HitCount](http://hits.dwyl.io/GouravRusiya30/SpringBootRestAPI.svg)](http://hits.dwyl.io/GouravRusiya30/SpringBootRestAPI)
 
+
+<img height="300px" src="https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/spring.png">
+
 ## Desciption
-This project mainly focussed on the kickstart to the CI/CD using TravisCI. Also includes CodeCoverage, Sonarqube integration which can be plugged into any application.
+#### This project mainly focussed on the Kickstart to the CI/CD using TravisCI. Includes CodeCoverage, Sonarqube integration which can be plugged into any application.
+
 
 ## Task List Progress
 - [X] Rest controllers and models using SpringBoot
