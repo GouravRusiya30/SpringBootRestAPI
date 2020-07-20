@@ -32,6 +32,8 @@ repositories {
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version:'2.1.1.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.1.1.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.1.RELEASE'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.1.1.RELEASE'
 }
 
