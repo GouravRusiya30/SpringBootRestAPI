@@ -15,16 +15,16 @@
 <img height="300px" src="https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/spring.png">
 
 ## Desciption
-#### This project mainly focussed on the Kickstart to the CI/CD using TravisCI. Includes CodeCoverage, Sonarqube integration which can be plugged into any application.
+#### This project mainly focused on the Kickstart to the CI/CD using TravisCI. Includes CodeCoverage, Sonarqube integration which can be plugged into any application.
 
 
 ## Task List Progress
 - [X] Rest controllers and models using SpringBoot
 - [X] MongoDB configuration
 - [X] TravisCI build
-- [X] SonarQube integration 
+- [X] SonarQube integration
 - [X] Jacoco Test report
-- [ ] JWT authentication
+- [X] JWT authentication
 - [ ] 80% and above Code Coverage (using codecov or coveralls)
 - [ ] Cloud deployment
 
@@ -33,7 +33,7 @@
 
 ### Pre-requisite and Installing Steps
 
-* Get a running instance of MongoDB that you can connect to. 
+* Get a running instance of MongoDB that you can connect to.
 For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
 * Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, or through a database manager like MongoDB Compass:
 ```use rest_tutorial;```
@@ -41,7 +41,7 @@ For more information on getting started with MongoDB, visit their [online tutori
 * Create a sample collection that will hold data about different types of pets. Let's create the collection with the following command:
 ```db.createCollection("pets");```
 
-* Once the collection is created, we need to add some data! 
+* Once the collection is created, we need to add some data!
 We can add data to the collection with the below query, you can add any number of data like this :
 ```db.pets.insertMany([```
   ```{```
@@ -62,11 +62,29 @@ We can add data to the collection with the below query, you can add any number o
 ```]);```
 
 * Add the mongodb authentication-database, username & password in [application.properties](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/src/main/resources/application.properties)
-If there is no authrntication when you are running locally then you can also remove these properties from this file.
+If there is no authentication when you are running locally then you can also remove these properties from this file.
 
+* Create the user roles in the database. The user roles can be one of "USER, MODERATOR or ADMIN"
+```
+db.roles.insertMany([
+   { name: "ROLE_USER" },
+   { name: "ROLE_MODERATOR" },
+   { name: "ROLE_ADMIN" },
+])
+```
 
 ### Running the tests
-Once the server starts, you are free to test your API however you choose.
+Once the server starts, your first need to register a user and login as that user to get a token.\
+
+##### [user registration](https://github.com/ravening/SpringBootRestAPI/blob/master/docs/UserRegistration.png)
+
+##### [User login](https://github.com/ravening/SpringBootRestAPI/blob/master/docs/UserLogin.png)
+
+Once you get the token, you need to pass that token for every request you make to the backend
+In the postman, select the "header" section and enter `Authorization` for the key and\
+"Bearer <the token you copied above>" for the value
+
+you are free to test your API however you choose.
 Use postman for the below tests :
 ##### [getAllPets](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/getAllPets.png)
 
@@ -77,6 +95,10 @@ Use postman for the below tests :
 ##### [deletePet](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/deletePet.png)
 
 ##### [modifyPetById](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/modifyPetById.png)
+
+Once done with all the testing, you can logout using the endpoint `/api/auth/logout`
+
+##### [logout](https://github.com/ravening/SpringBootRestAPI/blob/master/docs/UserLogout.png)
 
 ### Code Coverage
 For code coverage reports integration, I have shown example using Codecov and Coveralls as both are pretty popular and easy to integrate with the travis.
@@ -91,10 +113,10 @@ Awesome but please first go through the [ISSUE TEMPLATE.md](https://github.com/G
 
 ### Pull Request Template
 ``Are you up for your first PR for this project !!!``
-Awesome but please first go through the [PULL REQUEST TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/PULL_REQUEST_TEMPLATE.md) and use this template to submit your PR.
+Awesome but please first go through the [PULL REQUEST TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/PULL_REQUEST_TEMPLATE) and use this template to submit your PR.
 
 ### Contributing
 Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Authors
-* **Gourav Rusiya** 
+* **Gourav Rusiya**
