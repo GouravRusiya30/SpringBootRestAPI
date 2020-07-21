@@ -15,7 +15,7 @@
 <img height="300px" src="https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/spring.png">
 
 ## Desciption
-#### This project mainly focused on the Kickstart to the CI/CD using TravisCI. Includes CodeCoverage, Sonarqube integration which can be plugged into any application.
+#### A ready-to-use Template for Rest API using spring-boot-microservices, MongoDB as Database, Integrated with codecov and sonarqube, deployable to cloud. This template can be plugged into any application to kickstart task easily without writing everything from scratch.
 
 
 ## Task List Progress
