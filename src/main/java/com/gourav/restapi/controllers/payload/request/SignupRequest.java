@@ -1,8 +1,8 @@
 package com.gourav.restapi.controllers.payload.request;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.util.Set;
 
 public class SignupRequest {
@@ -49,7 +49,7 @@ public class SignupRequest {
         return this.roles;
     }
 
-    public void setRole(Set<String> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 }

@@ -1,35 +1,35 @@
 package com.gourav.restapi.models;
 
-import static org.junit.Assert.*;
-import org.bson.types.ObjectId;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class PetsTest {
 	
-	ObjectId id = ObjectId.get();
+	String id = "pet-123";
 	Pets pets = new Pets();
 	
 	@Test
 	public void testSetId(){
 		pets.setId(id);
-		assertTrue(pets.getId().equals(id.toHexString()));
+		assertEquals(id, pets.getId());
 	}
 	
 	@Test
 	public void testSetName(){
 		pets.setName("Liam");
-		assertTrue(pets.getName().equals("Liam"));
+		assertEquals("Liam", pets.getName());
 	}
 	
 	@Test
 	public void testSetSpecies(){
 		pets.setSpecies("cat");
-		assertTrue(pets.getSpecies().equals("cat"));
+		assertEquals("cat", pets.getSpecies());
 	}
 	
 	@Test
 	public void testSetBreed(){
 		pets.setBreed("tabby");
-		assertTrue(pets.getBreed().equals("tabby"));
+		assertEquals("tabby", pets.getBreed());
 	}
 }

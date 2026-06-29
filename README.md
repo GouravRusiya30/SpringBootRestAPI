@@ -33,8 +33,14 @@
 
 ### Pre-requisite and Installing Steps
 
+* Install Java 17.
 * Get a running instance of MongoDB that you can connect to.
 For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
+* Copy `.env.example` into your local environment configuration and set the values for your machine:
+  * `SERVER_PORT`
+  * `MONGODB_URI`
+  * `JWT_SECRET`
+  * `JWT_EXPIRATION_MS`
 * Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, or through a database manager like MongoDB Compass:
 ```use rest_tutorial;```
 
@@ -61,8 +67,7 @@ We can add data to the collection with the below query, you can add any number o
   ```}```
 ```]);```
 
-* Add the mongodb authentication-database, username & password in [application.properties](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/src/main/resources/application.properties)
-If there is no authentication when you are running locally then you can also remove these properties from this file.
+* Add the MongoDB connection details through `MONGODB_URI`. Keep secrets out of [application.properties](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/src/main/resources/application.properties).
 
 * Create the user roles in the database. The user roles can be one of "USER, MODERATOR or ADMIN"
 ```

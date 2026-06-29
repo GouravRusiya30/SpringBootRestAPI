@@ -1,20 +1,27 @@
 package com.gourav.restapi.models;
 
-import org.bson.types.ObjectId;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "pets")
 public class Pets {
 
 	@Id
-    private ObjectId id;
+    private String id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String species;
+
+    @NotBlank
     private String breed;
 
-    // Constructors
     public Pets() {}
 
-    public Pets(ObjectId id, String name, String species, String breed) {
+    public Pets(String id, String name, String species, String breed) {
       this.id = id;
       this.name = name;
       this.species = species;
@@ -27,9 +34,8 @@ public class Pets {
         this.breed = breed;
     }
 
-    // ObjectId needs to be converted to string
-    public String getId() { return id.toHexString(); }
-    public void setId(ObjectId id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
