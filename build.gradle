@@ -1,64 +1,65 @@
 plugins {
-  id "org.sonarqube" version "2.7"
+    id 'java'
+    id 'jacoco'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.sonarqube' version '5.1.0.4882'
 }
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'jacoco'
 
 group = 'com.gourav'
 version = '0.0.1-SNAPSHOT'
 
 description = """restApi"""
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
-
-task copyToLib(type: Copy) {
-    into "$buildDir/libs"
-    from(configurations.compile)
-}
-
-stage.dependsOn(copyToLib)
 
 repositories {
-     maven { url "https://repo.maven.apache.org/maven2" }
+    mavenCentral()
 }
+
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version:'2.1.1.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.1.1.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.1.RELEASE'
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.1.1.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-gradle.taskGraph.whenReady {
-  taskGraph ->
-    if (taskGraph.hasTask(stage)) {
-      test.enabled = false
-    }
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.gourav.restapi.RestApiApplication'
-    }
+tasks.register('stage') {
+    dependsOn 'build'
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
-        xml.enabled true
-        html.enabled false
+        xml.required = true
+        html.required = true
     }
 }
 
 check.dependsOn jacocoTestReport
 
-sonarqube {
-    androidVariant 'fullDebug'
+sonar {
+    properties {
+        property 'sonar.projectKey', 'GouravRusiya30_SpringBootRestAPI'
+    }
 }

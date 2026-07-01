@@ -2,6 +2,9 @@
 !.mvn/wrapper/maven-wrapper.jar
 
 /out/
+.env
+.env.*
+!.env.example
 
 ### STS ###
 .apt_generated
@@ -50,5 +53,3 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/gradlew.bat
-/settings.gradle
