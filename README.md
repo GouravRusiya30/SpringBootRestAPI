@@ -34,14 +34,20 @@
 ### Pre-requisite and Installing Steps
 
 * Install Java 17.
-* Get a running instance of MongoDB that you can connect to.
-For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
+* Install Docker and Docker Compose if you want the recommended local MongoDB setup.
 * Copy `.env.example` into your local environment configuration and set the values for your machine:
   * `SERVER_PORT`
   * `MONGODB_URI`
   * `JWT_SECRET`
   * `JWT_EXPIRATION_MS`
-* Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, or through a database manager like MongoDB Compass:
+* Start MongoDB locally with Docker Compose:
+```bash
+docker compose up -d mongodb
+```
+  This starts MongoDB on `localhost:27017` and stores database files in the named `mongodb_data` Docker volume. The default `.env.example` value, `MONGODB_URI=mongodb://localhost:27017/rest_tutorial`, connects the app to this container.
+* If you prefer to manage MongoDB yourself, get a running instance of MongoDB that you can connect to.
+For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
+* Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, Docker Compose container, or through a database manager like MongoDB Compass:
 ```use rest_tutorial;```
 
 * Create a sample collection that will hold data about different types of pets. Let's create the collection with the following command:
@@ -76,6 +82,26 @@ db.roles.insertMany([
    { name: "ROLE_MODERATOR" },
    { name: "ROLE_ADMIN" },
 ])
+```
+
+### Running the application locally
+
+After MongoDB is running and your environment variables are configured, start the API with Gradle:
+
+```bash
+./gradlew bootRun
+```
+
+The application uses `MONGODB_URI=mongodb://localhost:27017/rest_tutorial` by default for local Docker Compose development. To stop the MongoDB container when you are done, run:
+
+```bash
+docker compose down
+```
+
+Add `-v` to remove the persisted `mongodb_data` volume as well:
+
+```bash
+docker compose down -v
 ```
 
 ### Running the tests
