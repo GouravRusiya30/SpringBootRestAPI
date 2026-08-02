@@ -1,27 +1,68 @@
-name: CI
+name: CI — Build & Test
 
 on:
-  pull_request:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
+    name: Build & Test (Java 21)
     runs-on: ubuntu-latest
 
+    # ── Service containers (MongoDB for tests) ──────────────────────────────
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval \"db.adminCommand('ping')\""
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    # ── Steps ───────────────────────────────────────────────────────────────
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
 
-      - name: Build and test
-        run: sh ./gradlew clean build
+      - name: Build and run tests
+        env:
+          SERVER_PORT: 8081
+          MONGODB_URI: mongodb://localhost:27017/rest_tutorial
+          JWT_SECRET: ci-test-secret-value-minimum-64-chars-required-for-hs512-algorithm
+          JWT_EXPIRATION_MS: 3600000
+        run: ./gradlew clean test jacocoTestReport --no-daemon
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: build/reports/tests/test/
+
+      - name: Upload JaCoCo coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: build/reports/jacoco/test/html/
+
+      - name: Upload coverage to Codecov
+        if: success()
+        uses: codecov/codecov-action@v4
+        with:
+          files: build/reports/jacoco/test/jacocoTestReport.xml
+          fail_ci_if_error: false
