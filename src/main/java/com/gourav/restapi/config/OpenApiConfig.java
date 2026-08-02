@@ -7,6 +7,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,34 +16,43 @@ public class OpenApiConfig {
 
     private static final String BEARER_AUTH = "BearerAuth";
 
+    // All values come from application.properties / environment variables.
+    // Override via env vars: OPENAPI_TITLE, OPENAPI_CONTACT_NAME, etc.
+
+    @Value("${openapi.info.title}")
+    private String title;
+
+    @Value("${openapi.info.version}")
+    private String version;
+
+    @Value("${openapi.info.description}")
+    private String description;
+
+    @Value("${openapi.info.contact.name}")
+    private String contactName;
+
+    @Value("${openapi.info.contact.url}")
+    private String contactUrl;
+
+    @Value("${openapi.info.license.name}")
+    private String licenseName;
+
+    @Value("${openapi.info.license.url}")
+    private String licenseUrl;
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("SpringBoot REST API — Pets")
-                        .version("1.0.0")
-                        .description("""
-                                A ready-to-use REST API template built with **Spring Boot 3 + MongoDB**.
-                                
-                                ## Authentication
-                                1. Register via `POST /api/auth/signup`
-                                2. Login via `POST /api/auth/login` — copy the `accessToken`
-                                3. Click **Authorize** (🔒) above and enter `<your-token>` (without "Bearer ")
-                                4. All protected endpoints will automatically include the token.
-                                
-                                ## Roles
-                                | Role | Permissions |
-                                |---|---|
-                                | USER | Read pets |
-                                | MODERATOR | Read + Update pets |
-                                | ADMIN | Full CRUD |
-                                """)
+                        .title(title)
+                        .version(version)
+                        .description(description)
                         .contact(new Contact()
-                                .name("saivamsikaruturi")
-                                .url("https://github.com/saivamsikaruturi/SpringBootRestAPI"))
+                                .name(contactName)
+                                .url(contactUrl))
                         .license(new License()
-                                .name("MIT License")
-                                .url("https://github.com/saivamsikaruturi/SpringBootRestAPI/blob/master/LICENSE")))
+                                .name(licenseName)
+                                .url(licenseUrl)))
                 .addSecurityItem(new SecurityRequirement().addList(BEARER_AUTH))
                 .components(new Components()
                         .addSecuritySchemes(BEARER_AUTH,
