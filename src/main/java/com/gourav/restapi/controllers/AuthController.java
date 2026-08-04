@@ -6,6 +6,7 @@ import com.gourav.restapi.controllers.payload.request.LoginRequest;
 import com.gourav.restapi.controllers.payload.request.SignupRequest;
 import com.gourav.restapi.controllers.payload.response.JwtResponse;
 import com.gourav.restapi.controllers.payload.response.MessageResponse;
+import com.gourav.restapi.exceptions.RoleNotFoundException;
 import com.gourav.restapi.models.ERole;
 import com.gourav.restapi.models.Role;
 import com.gourav.restapi.models.User;
@@ -103,24 +104,24 @@ public class AuthController {
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RoleNotFoundException(ERole.ROLE_USER.name()));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RoleNotFoundException(ERole.ROLE_ADMIN.name()));
                         roles.add(adminRole);
                         break;
                     case "mod":
                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RoleNotFoundException(ERole.ROLE_MODERATOR.name()));
                         roles.add(modRole);
                         break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RoleNotFoundException(ERole.ROLE_USER.name()));
                         roles.add(userRole);
                 }
             });

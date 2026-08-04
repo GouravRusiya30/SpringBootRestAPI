@@ -95,6 +95,6 @@ check.dependsOn jacocoTestReport
 
 sonar {
     properties {
-        property 'sonar.projectKey', 'saivamsikaruturi_SpringBootRestAPI'
+        property 'sonar.projectKey', 'GouravRusiya30_SpringBootRestAPI'
     }
 }

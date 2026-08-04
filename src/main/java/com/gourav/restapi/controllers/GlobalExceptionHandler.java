@@ -1,6 +1,7 @@
 package com.gourav.restapi.controllers;
 
 import com.gourav.restapi.controllers.payload.response.ErrorResponse;
+import com.gourav.restapi.exceptions.RoleNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,17 +43,18 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Catches RuntimeException from missing role lookups in AuthController
-     * (e.g. "Error: Role is not found." when roles collection is not seeded).
-     * Returns a clean 500 JSON response instead of leaking a stack trace.
+     * Catches RoleNotFoundException when required roles are missing from the DB.
+     * Returns a clean 500 JSON with a helpful message pointing to README seeding instructions.
+     * Scoped to RoleNotFoundException only — does not swallow NullPointerException,
+     * IllegalStateException, DataAccessException, or other RuntimeExceptions.
      */
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException exception,
-                                                                HttpServletRequest request) {
-        logger.error("Unhandled RuntimeException at {}: {}", request.getRequestURI(), exception.getMessage(), exception);
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRoleNotFound(RoleNotFoundException exception,
+                                                            HttpServletRequest request) {
+        logger.error("Role not found at {}: {}", request.getRequestURI(), exception.getMessage());
         return buildResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                exception.getMessage() != null ? exception.getMessage() : "An unexpected error occurred",
+                exception.getMessage(),
                 request.getRequestURI(),
                 Map.of()
         );
