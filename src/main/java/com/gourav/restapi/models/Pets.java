@@ -1,13 +1,25 @@
 package com.gourav.restapi.models;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Document(collection = "pets")
 public class Pets {
 
-	@Id
+    @Id
     private String id;
 
     @NotBlank
@@ -19,30 +31,24 @@ public class Pets {
     @NotBlank
     private String breed;
 
-    public Pets() {}
+    private Integer age;
 
-    public Pets(String id, String name, String species, String breed) {
-      this.id = id;
-      this.name = name;
-      this.species = species;
-      this.breed = breed;
-    }
+    private String color;
 
+    @Builder.Default
+    private String adoptionStatus = "AVAILABLE";
+
+    @CreatedDate
+    private Instant createdAt;
+
+    @LastModifiedDate
+    private Instant updatedAt;
+
+    // Convenience constructor used by DbSeeder (name, species, breed)
     public Pets(String name, String species, String breed) {
         this.name = name;
         this.species = species;
         this.breed = breed;
+        this.adoptionStatus = "AVAILABLE";
     }
-
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getSpecies() { return species; }
-    public void setSpecies(String species) { this.species = species; }
-
-    public String getBreed() { return breed; }
-    public void setBreed(String breed) { this.breed = breed; }
 }

@@ -30,7 +30,14 @@ public class PetsService {
     }
 
     public PetResponse createPet(CreatePetRequest request) {
-        Pets pet = new Pets(request.getName(), request.getSpecies(), request.getBreed());
+        Pets pet = Pets.builder()
+                .name(request.getName())
+                .species(request.getSpecies())
+                .breed(request.getBreed())
+                .age(request.getAge())
+                .color(request.getColor())
+                .adoptionStatus(request.getAdoptionStatus() != null ? request.getAdoptionStatus() : "AVAILABLE")
+                .build();
         return toResponse(petsRepository.save(pet));
     }
 
@@ -39,6 +46,15 @@ public class PetsService {
         pet.setName(request.getName());
         pet.setSpecies(request.getSpecies());
         pet.setBreed(request.getBreed());
+        if (request.getAge() != null) {
+            pet.setAge(request.getAge());
+        }
+        if (request.getColor() != null) {
+            pet.setColor(request.getColor());
+        }
+        if (request.getAdoptionStatus() != null) {
+            pet.setAdoptionStatus(request.getAdoptionStatus());
+        }
         return toResponse(petsRepository.save(pet));
     }
 
@@ -49,10 +65,20 @@ public class PetsService {
 
     private Pets findPet(String id) {
         return petsRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found with id: " + id));
     }
 
     private PetResponse toResponse(Pets pet) {
-        return new PetResponse(pet.getId(), pet.getName(), pet.getSpecies(), pet.getBreed());
+        return new PetResponse(
+                pet.getId(),
+                pet.getName(),
+                pet.getSpecies(),
+                pet.getBreed(),
+                pet.getAge(),
+                pet.getColor(),
+                pet.getAdoptionStatus(),
+                pet.getCreatedAt(),
+                pet.getUpdatedAt()
+        );
     }
 }
