@@ -43,12 +43,4 @@ public class Pets {
 
     @LastModifiedDate
     private Instant updatedAt;
-
-    // Convenience constructor used by DbSeeder (name, species, breed)
-    public Pets(String name, String species, String breed) {
-        this.name = name;
-        this.species = species;
-        this.breed = breed;
-        this.adoptionStatus = "AVAILABLE";
-    }
 }

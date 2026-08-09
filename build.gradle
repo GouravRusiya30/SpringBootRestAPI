@@ -37,10 +37,7 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 
-    // Redis (for JWT blacklist production profile)
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
-    // Actuator (health + info endpoints)
+    // Actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     // OpenAPI / Swagger UI
@@ -92,6 +89,8 @@ jacocoTestCoverageVerification {
 }
 
 check.dependsOn jacocoTestReport
+
+
 
 sonar {
     properties {

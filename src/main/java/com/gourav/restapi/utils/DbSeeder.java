@@ -37,9 +37,12 @@ public class DbSeeder {
 
         logger.info("DbSeeder: seeding pets collection with sample data...");
         List<Pets> petsList = List.of(
-                Pets.builder().name("Spike").species("Dog").breed("Bulldog").age(3).color("Brown").adoptionStatus("AVAILABLE").build(),
-                Pets.builder().name("Tom").species("Cat").breed("Regular").age(2).color("Grey").adoptionStatus("AVAILABLE").build(),
-                Pets.builder().name("Jerry").species("Mouse").breed("Special").age(1).color("Brown").adoptionStatus("ADOPTED").build()
+                Pets.builder().name("Spike").species("Dog").breed("Bulldog")
+                        .age(3).color("Brown").adoptionStatus("AVAILABLE").build(),
+                Pets.builder().name("Tom").species("Cat").breed("Regular")
+                        .age(2).color("Grey").adoptionStatus("AVAILABLE").build(),
+                Pets.builder().name("Jerry").species("Mouse").breed("Special")
+                        .age(1).color("Brown").adoptionStatus("ADOPTED").build()
         );
 
         petsRepository.saveAll(petsList);
