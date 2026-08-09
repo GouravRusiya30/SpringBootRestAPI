@@ -52,11 +52,11 @@ public class PetsController {
     @GetMapping(value = "/")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public PagedResponse<PetResponse> getAllPets(
-            @RequestParam(defaultValue = "0")    int page,
-            @RequestParam(defaultValue = "10")   int size,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "name") String sortBy,
-            @RequestParam(required = false)      String species,
-            @RequestParam(required = false)      String adoptionStatus) {
+            @RequestParam(required = false) String species,
+            @RequestParam(required = false) String adoptionStatus) {
         return petsService.getPets(page, size, sortBy, species, adoptionStatus);
     }
 
