@@ -1,158 +1,237 @@
-# [ RestAPI Template - Spring Boot + MongoDB](https://gouravrusiya30.github.io/SpringBootRestAPI/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/LICENSE)
-[![Travis Build Status](https://travis-ci.org/GouravRusiya30/SpringBootRestAPI.svg?branch=master)](https://travis-ci.org/GouravRusiya30/SpringBootRestAPI)
-[![sonar](https://sonarcloud.io/api/project_badges/measure?project=GouravRusiya30_SpringBootRestAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=GouravRusiya30_SpringBootRestAPI)
-[![codecov](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI)
-[![Build status](https://ci.appveyor.com/api/projects/status/5e852fcrbt0clhej?svg=true)](https://ci.appveyor.com/project/GouravRusiya30/springbootrestapi)
+# RestAPI Template — Spring Boot 3 · Java 21 · MongoDB · JWT
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+> **A production-ready REST API starter** — fork it, swap the domain, and ship. Built on the latest stack so you don't start from scratch.
+
+[![CI](https://github.com/GouravRusiya30/SpringBootRestAPI/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/GouravRusiya30/SpringBootRestAPI/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/GouravRusiya30/SpringBootRestAPI)
+[![sonar](https://sonarcloud.io/api/project_badges/measure?project=GouravRusiya30_SpringBootRestAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=GouravRusiya30_SpringBootRestAPI)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/LICENSE)
+
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/GouravRusiya30/SpringBootRestAPI/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CONTRIBUTING.md)
 [![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://code.publiclab.org#r=all)
-[![HitCount](http://hits.dwyl.io/GouravRusiya30/SpringBootRestAPI.svg)](http://hits.dwyl.io/GouravRusiya30/SpringBootRestAPI)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
+<img height="260px" src="https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/spring.png">
 
-<img height="300px" src="https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/spring.png">
+---
 
-## Desciption
-#### A ready-to-use Template for Rest API using spring-boot-microservices, MongoDB as Database, Integrated with codecov and sonarqube, deployable to cloud. This template can be plugged into any application to kickstart task easily without writing everything from scratch.
+## What's Inside
 
+A fully-wired REST API template demonstrating:
+
+- **Spring Boot 3.3** · **Java 21** · **MongoDB**
+- **Stateless JWT authentication** — signup, login, logout with in-memory token blacklist
+- **Role-based access control** — `ROLE_USER`, `ROLE_MODERATOR`, `ROLE_ADMIN` via `@PreAuthorize`
+- **Pagination & filtering** on list endpoints
+- **Structured error responses** — consistent JSON on every error (4xx / 5xx)
+- **OpenAPI / Swagger UI** — auto-generated, browsable at `/swagger-ui.html`
+- **Spring Boot Actuator** — `/actuator/health` and `/actuator/info`
+- **JaCoCo** coverage reports + **SonarCloud** static analysis
+- **GitHub Actions** CI — builds, tests, and uploads coverage on every push/PR
+- **Docker Compose** for local MongoDB
+
+---
 
 ## Task List Progress
-- [X] Rest controllers and models using SpringBoot
-- [X] MongoDB configuration
-- [X] TravisCI build
-- [X] SonarQube integration
-- [X] Jacoco Test report
-- [X] JWT authentication
-- [ ] 80% and above Code Coverage (using codecov or coveralls)
-- [ ] Cloud deployment
 
-### Getting Started
-* Import this project into your favourite IDE after fork and checkout of this repository.
+- [x] REST controllers and models with Spring Boot
+- [x] MongoDB configuration
+- [x] JWT authentication (signup / login / logout)
+- [x] Role-based access control
+- [x] Pagination and filtering on list endpoints
+- [x] OpenAPI / Swagger UI
+- [x] GitHub Actions CI pipeline
+- [x] SonarCloud integration
+- [x] JaCoCo test coverage report + Codecov upload
+- [ ] 80 %+ code coverage
+- [ ] Cloud deployment (Render / Railway)
 
-### Pre-requisite and Installing Steps
+---
 
-* Install Java 17.
-* Install Docker and Docker Compose if you want the recommended local MongoDB setup.
-* Copy `.env.example` into your local environment configuration and set the values for your machine:
-  * `SERVER_PORT`
-  * `MONGODB_URI`
-  * `JWT_SECRET`
-  * `JWT_EXPIRATION_MS`
-* Start MongoDB locally with Docker Compose:
+## API Reference
+
+### Auth — `/api/auth/**` (no token required)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/api/auth/signup` | Register a new user. Body: `username`, `email`, `password`, optional `roles` array (`"admin"`, `"mod"`). |
+| `POST` | `/api/auth/login` | Authenticate. Returns a JWT in `JwtResponse`. |
+| `POST` | `/api/auth/logout` | Invalidate the current JWT. Requires `Authorization: Bearer <token>`. |
+
+### Pets — `/pets/**` (JWT required)
+
+| Method | Path | Role | Description |
+|--------|------|------|-------------|
+| `GET` | `/pets/` | USER / MOD / ADMIN | Paginated list. Query params: `page`, `size`, `sortBy`, `species`, `adoptionStatus`. |
+| `GET` | `/pets/{id}` | USER / MOD / ADMIN | Get a single pet by ID. |
+| `POST` | `/pets/` | USER / MOD / ADMIN | Create a pet. Body: `name`, `species`, `breed` (required) + `age`, `color`, `adoptionStatus`. |
+| `PUT` | `/pets/{id}` | MOD / ADMIN | Full update of a pet. |
+| `DELETE` | `/pets/{id}` | ADMIN | Delete a pet. Returns `204 No Content`. |
+
+### Infrastructure (no token required)
+
+| Path | Description |
+|------|-------------|
+| `/swagger-ui.html` | Interactive API explorer |
+| `/v3/api-docs` | Raw OpenAPI JSON spec |
+| `/actuator/health` | Application health status |
+| `/actuator/info` | App name and version |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Java 21** (e.g. [Temurin](https://adoptium.net/))
+- **Docker & Docker Compose** — for the recommended local MongoDB setup
+- **Gradle** (wrapper included — no separate install needed)
+
+### 1 — Clone & configure
+
+```bash
+git clone https://github.com/GouravRusiya30/SpringBootRestAPI.git
+cd SpringBootRestAPI
+cp .env.example .env        # edit the values for your machine
+```
+
+Key variables in `.env`:
+
+| Variable | Description |
+|----------|-------------|
+| `SERVER_PORT` | Port the app listens on (default `8080`) |
+| `MONGODB_URI` | MongoDB connection string |
+| `JWT_SECRET` | HS512 signing secret — **minimum 64 characters** |
+| `JWT_EXPIRATION_MS` | Token TTL in milliseconds (e.g. `3600000` = 1 h) |
+
+### 2 — Start MongoDB
+
 ```bash
 docker compose up -d mongodb
 ```
-  This starts MongoDB on `localhost:27017` and stores database files in the named `mongodb_data` Docker volume. The default `.env.example` value, `MONGODB_URI=mongodb://localhost:27017/rest_tutorial`, connects the app to this container.
-* If you prefer to manage MongoDB yourself, get a running instance of MongoDB that you can connect to.
-For more information on getting started with MongoDB, visit their [online tutorial](https://docs.mongodb.com/manual/).
-* Start by creating a test database. I will call mine "rest_tutorial" using the following command in the MongoDB shell, Docker Compose container, or through a database manager like MongoDB Compass:
-```use rest_tutorial;```
 
-* Create a sample collection that will hold data about different types of pets. Let's create the collection with the following command:
-```db.createCollection("pets");```
+This starts MongoDB 7 on `localhost:27017` and persists data in the `mongodb_data` Docker volume.
 
-* Once the collection is created, we need to add some data!
-We can add data to the collection with the below query, you can add any number of data like this :
-```db.pets.insertMany([```
-  ```{```
-    ```"name" : "Spot",```
-    ```"species" : "dog",```
-    ```"breed" : "pitbull"```
- ``` },```
-  ```{```
-    ```"name" : "Daisy",```
-    ```"species" : "cat",```
-    ```"breed" : "calico"```
-  ```},```
-  ```{```
-    ```"name" : "Bella",```
-    ```"species" : "dog",```
-    ```"breed" : "australian shepard"```
-  ```}```
-```]);```
+### 3 — Seed the database
 
-* Add the MongoDB connection details through `MONGODB_URI`. Keep secrets out of [application.properties](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/src/main/resources/application.properties).
+The `local` Spring profile auto-seeds roles and sample pets on first startup. To activate it:
 
-* Create the user roles in the database. The user roles can be one of "USER, MODERATOR or ADMIN"
+```bash
+# Linux / macOS
+SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
+
+# Windows PowerShell
+$env:SPRING_PROFILES_ACTIVE="local"; ./gradlew bootRun
 ```
+
+Or seed manually in the MongoDB shell:
+
+```js
+// Roles (required before first signup)
 db.roles.insertMany([
-   { name: "ROLE_USER" },
-   { name: "ROLE_MODERATOR" },
-   { name: "ROLE_ADMIN" },
+  { name: "ROLE_USER" },
+  { name: "ROLE_MODERATOR" },
+  { name: "ROLE_ADMIN" }
+])
+
+// Sample pets (optional)
+db.pets.insertMany([
+  { name: "Spot",  species: "dog", breed: "pitbull",           adoptionStatus: "AVAILABLE" },
+  { name: "Daisy", species: "cat", breed: "calico",            adoptionStatus: "AVAILABLE" },
+  { name: "Bella", species: "dog", breed: "australian shepard",adoptionStatus: "PENDING"   }
 ])
 ```
 
-### Running the application locally
-
-After MongoDB is running and your environment variables are configured, start the API with Gradle:
+### 4 — Run the application
 
 ```bash
 ./gradlew bootRun
 ```
 
-The application uses `MONGODB_URI=mongodb://localhost:27017/rest_tutorial` by default for local Docker Compose development. To stop the MongoDB container when you are done, run:
+The API is now available at `http://localhost:8080`.
+Open **`http://localhost:8080/swagger-ui.html`** to explore and try every endpoint interactively.
+
+### 5 — Stop
 
 ```bash
-docker compose down
+docker compose down          # stop MongoDB, keep data
+docker compose down -v       # stop MongoDB and delete data volume
 ```
 
-Add `-v` to remove the persisted `mongodb_data` volume as well:
+---
+
+## Running the Tests
 
 ```bash
-docker compose down -v
+./gradlew test
 ```
 
-### Running the tests
-Once the server starts, your first need to register a user and login as that user to get a token.\
+To also generate the JaCoCo HTML coverage report:
 
-##### [user registration](https://github.com/ravening/SpringBootRestAPI/blob/master/docs/UserRegistration.png)
+```bash
+./gradlew test jacocoTestReport
+# open build/reports/jacoco/test/html/index.html
+```
 
-##### [User login](https://github.com/ravening/SpringBootRestAPI/blob/master/docs/UserLogin.png)
+The CI pipeline runs both steps automatically on every push and pull request to `master`.
 
-Once you get the token, you need to pass that token for every request you make to the backend
-In the postman, select the "header" section and enter `Authorization` for the key and\
-"Bearer <the token you copied above>" for the value
+---
 
-you are free to test your API however you choose.
-Use postman for the below tests :
-##### [getAllPets](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/getAllPets.png)
+## Try It — Quick Walkthrough
 
-##### [getPetById](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/getPetById.png)
+All examples use `curl`. You can do the same through the Swagger UI at `/swagger-ui.html`.
 
-##### [createPet](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/createPet.png)
+**1. Register a user**
+```bash
+curl -X POST http://localhost:8080/api/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"username":"alice","email":"alice@example.com","password":"secret123","roles":["admin"]}'
+```
 
-##### [deletePet](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/deletePet.png)
+**2. Login and capture the token**
+```bash
+TOKEN=$(curl -s -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"alice","password":"secret123"}' | jq -r '.token')
+```
 
-##### [modifyPetById](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/docs/modifyPetById.png)
+**3. List pets (paginated)**
+```bash
+curl -H "Authorization: Bearer $TOKEN" \
+  "http://localhost:8080/pets/?page=0&size=5&species=dog"
+```
 
-Once done with all the testing, you can logout using the endpoint `/api/auth/logout`
+**4. Create a pet**
+```bash
+curl -X POST http://localhost:8080/pets/ \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Max","species":"dog","breed":"labrador","adoptionStatus":"AVAILABLE"}'
+```
 
-##### [logout](https://github.com/ravening/SpringBootRestAPI/blob/master/docs/UserLogout.png)
+**5. Logout**
+```bash
+curl -X POST http://localhost:8080/api/auth/logout \
+  -H "Authorization: Bearer $TOKEN"
+```
 
-### Code Coverage
-For code coverage reports integration, I have shown example using Codecov and Coveralls as both are pretty popular and easy to integrate with the travis.
+---
 
-* Codecov -  Just add [this line](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/.travis.yml#L5) in the [.travis.yml](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/.travis.yml) which will send the jacoco report to the codecov console
-
-* Coveralls - Need to add [coveralls plugin](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/coverall-integration/build.gradle#L3) and [jacoco report path](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/97df783623e5c35696451c580cc7895d17c0743a/build.gradle#L52) in the build.gradle file. Also need change in [.travis.yml](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/97df783623e5c35696451c580cc7895d17c0743a/build.gradle#L52) instead of codecov to use coveralls
-
-
-### Planned GitHub Issues
+## Planned GitHub Issues
 
 A ready-to-copy backlog of suggested GitHub issues is available in [docs/github-issue-backlog.md](docs/github-issue-backlog.md).
 
-### Issue Request Template
-``Are you up for your first Issue Request for this project !!!``
-Awesome but please first go through the [ISSUE TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/tree/master/.github/ISSUE_TEMPLATE/feature_request.md) and use this template to submit any issue request.
+---
 
-### Pull Request Template
-``Are you up for your first PR for this project !!!``
-Awesome but please first go through the [PULL REQUEST TEMPLATE.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/PULL_REQUEST_TEMPLATE) and use this template to submit your PR.
+## Contributing
 
-### Contributing
-Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CONTRIBUTING.md) and [CODE OF CONDUCT.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](https://github.com/GouravRusiya30/SpringBootRestAPI/blob/master/CODE_OF_CONDUCT.md) before opening a pull request.
 
-### Authors
-* **Gourav Rusiya**
+Use the issue and PR templates in `.github/` — they keep reviews fast and focused.
+
+---
+
+## Authors
+
+**Gourav Rusiya** — [@GouravRusiya30](https://github.com/GouravRusiya30)
